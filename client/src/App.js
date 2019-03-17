@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // components
-import Home from "./components/Home"
+import Login from "./components/Login"
 import About from './components/About'
 import Admin from './components/Admin'
 
@@ -29,7 +29,7 @@ class App extends Component {
 
         <hr />
 
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Login} />
         <Route path="/about" component={About} />
         <Route path="/admin" component={Admin} />
       </div>

@@ -9,12 +9,20 @@ module.exports = (app) => {
   app.post('/login',
     AuthenticationController.login)
 
-  app.post('/admin/createStaff',
-        Admin.createStaff
+  app.post('/createStaff',
+        Admin.addStaff
   )
 
   app.post('/admin/getstaff',
      Admin.getStaff
+  )
+
+  app.get('/test',
+    Admin.test
+  )
+
+  app.post('/staff/attendance/:id',
+       Admin.attendance
   )
 
   

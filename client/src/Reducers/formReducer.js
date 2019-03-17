@@ -1,18 +1,21 @@
-import {FETCH_STAFFS} from '../actions/types';
+import {LOGIN} from '../actions/types';
 
 const initialState = {
-    items: [],
-    item:{}
+    item:{},
+
 }
 
 export default function(state = initialState, action) {
+    const { payload } = action;
     switch(action.type) {
-        case FETCH_STAFFS:
-        console.log(action.payload)
+
+         case LOGIN:
+
+         console.log("payload login")
          return {
              ...state,
-             items: action.payload,
-         };
+            item: payload
+         }
         default:
          return state;
     }

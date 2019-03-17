@@ -1,15 +1,15 @@
 const {
     Admin
   } = require('../models')
-  
+  const jwt = require('jsonwebtoken')
   const config = require('../config/config')
   
-  // function jwtSignUser(user) {
-  //   const ONE_WEEK = 60 * 60 * 24 * 7
-  //   return jwt.sign(user, config.authentication.jwtSecret, {
-  //     expiresIn: ONE_WEEK
-  //   })
-  // }
+  function jwtSignUser(user) {
+    const ONE_WEEK = 60 * 60 * 24 * 7
+    return jwt.sign(user, config.authentication.jwtSecret, {
+      expiresIn: ONE_WEEK
+    })
+  }
   
   module.exports = {
     async register(req, res) {
@@ -17,7 +17,8 @@ const {
         const user = await Admin.create(req.body)
         const userJson = user.toJSON()
         res.send({
-          user: userJson,
+          status : true,
+          msg : "User Registered"
           // token: jwtSignUser(userJson)
         })
       } catch (err) {
@@ -32,6 +33,7 @@ const {
           email,
           password
         } = req.body
+        console.log(email, password)
         const user = await Admin.findOne({
           where: {
             email: email
@@ -49,14 +51,14 @@ const {
         if (!isPasswordValid) {
           return res.status(403).send({
             error: 'The login information was incorrect',
-            err: this.isPasswordValid
           })
         }
   
         const userJson = user.toJSON()
         res.send({
-          user: userJson,
-          // token: jwtSignUser(userJson)
+          status : true,
+          user : user,
+          // token: jwtSignUser(user)
         })
       } catch (err) {
         res.status(500).send({
